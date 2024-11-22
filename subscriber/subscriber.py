@@ -26,7 +26,8 @@ def callback(message):
             return
 
         # API 서버로 데이터 전송
-        headers = {"X-API-Key": API_KEY}
+        # headers = {"X-API-Key": API_KEY}
+        headers = {}
         for attempt in range(3):
             response = requests.post(API_URL, json=data, headers=headers)
             if response.status_code == 200:
