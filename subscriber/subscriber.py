@@ -14,7 +14,7 @@ def callback(message):
     try:
         data = json.loads(message.data.decode('utf-8'))
         # 필수 필드 검증
-        required_fields = ['cafeteria_id', 'wait_count', 'estimated_wait_time', 'timestamp']
+        required_fields = ['building_id', 'id', 'ewt_num', 'ewt_cur', 'timestamp']
         if not all(field in data for field in required_fields):
             print("Invalid message format")
             message.ack()
