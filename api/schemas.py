@@ -4,7 +4,7 @@ from datetime import datetime
 
 class WaitTimeCreate(BaseModel):
     building_id: int
-    cafeteria_id: int
-    wait_count: int
-    estimated_wait_time: float
+    store_id: int
+    ewt_num: int
+    ewt_cur: float
     timestamp: datetime

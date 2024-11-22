@@ -6,7 +6,8 @@ class WaitTime(Base):
     __tablename__ = "wait_times"
 
     id = Column(Integer, primary_key=True, index=True)
-    cafeteria_id = Column(Integer, nullable=False)
-    wait_count = Column(Integer, nullable=False)
-    estimated_wait_time = Column(Float, nullable=False)
+    building_id = Column(Integer, nullable=False)
+    store_id = Column(Integer, nullable=False)
+    ewt_num = Column(Integer, nullable=False)
+    ewt_cur = Column(Float, nullable=False)
     timestamp = Column(DateTime, nullable=False)
