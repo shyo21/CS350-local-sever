@@ -1,6 +1,6 @@
 # api/models.py
 from sqlalchemy import Column, Integer, String, Float, DateTime
-from database import Base
+from api.database import Base
 
 class WaitTime(Base):
     __tablename__ = "wait_times"
