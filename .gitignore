@@ -1,0 +1,19 @@
+# Python 관련
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 환경 변수 파일
+.env
+
+# Docker 관련
+docker-compose.override.yml
+*.log
+
+# IDE 관련
+.vscode/
+.idea/
+
+# 기타
+*.sqlite3
