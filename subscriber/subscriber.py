@@ -2,12 +2,17 @@
 import os
 import json
 import requests
+import time
 from google.cloud import pubsub_v1
+from dotenv import load_dotenv
 
 # 환경 변수 로드
+load_dotenv()
+
 PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 SUBSCRIPTION_ID = os.getenv("GCP_SUBSCRIPTION_ID")
 API_URL = os.getenv("API_URL")
+GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 def callback(message):
     print(f"Received message: {message.data}")
@@ -21,23 +26,23 @@ def callback(message):
             return
 
         # API 서버로 데이터 전송
-        response = requests.post(API_URL, json=data)
-        if response.status_code == 200:
-            print("Data successfully inserted into DB")
+        headers = {"X-API-Key": API_KEY}
+        for attempt in range(3):
+            response = requests.post(API_URL, json=data, headers=headers)
+            if response.status_code == 200:
+                print("Data successfully inserted into DB")
+                message.ack()
+                break
+            else:
+                print(f"Failed to insert data into DB: {response.text}")
+                time.sleep(5)  # 재시도 전 대기
         else:
-            print(f"Failed to insert data into DB: {response.text}")
-            # 재시도 필요 시 nack 처리
-            # message.nack()
-            # return
+            print("Max retries reached. Message will be nacked.")
+            message.nack()
 
     except Exception as e:
         print(f"Error processing message: {e}")
-        # 재시도 필요 시 nack 처리
-        # message.nack()
-        # return
-
-    # 메시지 승인
-    message.ack()
+        message.nack()
 
 def main():
     subscriber = pubsub_v1.SubscriberClient()
