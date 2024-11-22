@@ -4,6 +4,9 @@ __pycache__/
 *.pyo
 *.pyd
 
+# 구글 키
+key.json
+
 # 환경 변수 파일
 .env
 
