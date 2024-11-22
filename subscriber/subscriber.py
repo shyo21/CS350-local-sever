@@ -4,10 +4,10 @@ import json
 import requests
 import time
 from google.cloud import pubsub_v1
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 # 환경 변수 로드
-load_dotenv()
+#load_dotenv()
 
 PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 SUBSCRIPTION_ID = os.getenv("GCP_SUBSCRIPTION_ID")
