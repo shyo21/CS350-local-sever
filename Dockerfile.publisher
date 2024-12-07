@@ -1,0 +1,21 @@
+# Dockerfile.subscriber
+FROM python:3.13
+
+# 환경 변수 설정
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# 작업 디렉토리 설정
+WORKDIR /publisher
+
+# 종속성 설치
+COPY publisher/requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# 애플리케이션 코드 복사
+COPY publisher /publisher
+
+# 애플리케이션 실행
+CMD ["python", "publisher.py"]
+

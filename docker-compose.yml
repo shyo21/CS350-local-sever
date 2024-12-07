@@ -35,10 +35,23 @@ services:
     depends_on:
       - api_server
     environment:
-      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
-      - GCP_SUBSCRIPTION_ID=${GCP_SUBSCRIPTION_ID}
-      - API_URL=${API_URL}
-      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+#      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
+#      - GCP_SUBSCRIPTION_ID=${GCP_SUBSCRIPTION_ID}
+#      - API_URL=${API_URL}
+#      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:${GOOGLE_APPLICATION_CREDENTIALS}
+    networks:
+      - app-network
+
+  publisher:
+    build:
+      context: .
+      dockerfile: Dockerfile.publisher
+    container_name: pubsub_publisher
+    depends_on:
+      - api_server
+    environment:
     volumes:
       - ${GOOGLE_APPLICATION_CREDENTIALS}:${GOOGLE_APPLICATION_CREDENTIALS}
     networks:
