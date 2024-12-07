@@ -34,7 +34,7 @@ services:
     container_name: pubsub_subscriber
     depends_on:
       - api_server
-    environment:
+#    environment:
 #      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
 #      - GCP_SUBSCRIPTION_ID=${GCP_SUBSCRIPTION_ID}
 #      - API_URL=${API_URL}
@@ -51,7 +51,7 @@ services:
     container_name: pubsub_publisher
     depends_on:
       - api_server
-    environment:
+#    environment:
     volumes:
       - ${GOOGLE_APPLICATION_CREDENTIALS}:${GOOGLE_APPLICATION_CREDENTIALS}
     networks:
