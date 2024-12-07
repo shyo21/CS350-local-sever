@@ -6,7 +6,7 @@ from google.cloud import pubsub_v1
 # Configuration
 PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 TOPIC_ID = os.getenv("GCP_PUBLISH_ID")
-API_URL = os.getenv("AVG_URL")
+API_URL = os.getenv("API_URL")
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 INTERVAL = 15 * 60  # 15 minutes in seconds
 

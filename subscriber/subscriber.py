@@ -11,7 +11,7 @@ from google.cloud import pubsub_v1
 
 PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 SUBSCRIPTION_ID = os.getenv("GCP_SUBSCRIPTION_ID")
-API_URL = os.getenv("ADD_URL")
+API_URL = os.getenv("API_URL")
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 def callback(message):
