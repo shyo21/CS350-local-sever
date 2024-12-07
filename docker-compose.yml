@@ -34,11 +34,11 @@ services:
     container_name: pubsub_subscriber
     depends_on:
       - api_server
-#    environment:
-#      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
-#      - GCP_SUBSCRIPTION_ID=${GCP_SUBSCRIPTION_ID}
-#      - API_URL=${API_URL}
-#      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+    environment:
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
+      - GCP_SUBSCRIPTION_ID=${GCP_SUBSCRIPTION_ID}
+      - API_URL=${ADD_URL}
+      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
     volumes:
       - ${GOOGLE_APPLICATION_CREDENTIALS}:${GOOGLE_APPLICATION_CREDENTIALS}
     networks:
@@ -51,7 +51,11 @@ services:
     container_name: pubsub_publisher
     depends_on:
       - api_server
-#    environment:
+    environment:
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
+      - GCP_TOPIC_ID=${GCP_PUBLISH_ID}
+      - API_URL=${AVG_URL}
+      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
     volumes:
       - ${GOOGLE_APPLICATION_CREDENTIALS}:${GOOGLE_APPLICATION_CREDENTIALS}
     networks:
