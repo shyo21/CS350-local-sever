@@ -3,9 +3,10 @@ import requests
 from google.cloud import pubsub_v1
 
 # Configuration
-API_URL = 'http://your-api-server/calc_avg'
-PROJECT_ID = 'your-google-cloud-project-id'
-TOPIC_ID = 'your-pubsub-topic-id'
+PROJECT_ID = os.getenv("GCP_PROJECT_ID")
+TOPIC_ID = os.getenv("GCP_PUBLISH_ID")
+API_URL = os.getenv("AVG_URL")
+GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 INTERVAL = 15 * 60  # 15 minutes in seconds
 
 # Initialize Pub/Sub publisher
