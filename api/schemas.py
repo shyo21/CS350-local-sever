@@ -21,3 +21,11 @@ class WaitTimeResponse(BaseModel):
 
     class Config:
         orm_mode = True
+        
+class AvgTimeResponse(BaseModel):
+    building_id: int
+    store_id: int
+    ewt_avg: float
+
+    class Config:
+        orm_mode = True

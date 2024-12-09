@@ -3,12 +3,13 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from datetime import datetime
+from typing import List
 
 app = FastAPI()
 
 models.Base.metadata.create_all(bind=database.engine)
 
-@app.post("/add_wait_time", response_model=schemas.WaitTimeCreate)
+@app.post("/add_wait_time", response_model=schemas.WaitTimeResponse)
 def add_wait_time(wait_time: schemas.WaitTimeCreate, db: Session = Depends(database.get_db)):
     db_wait_time = models.WaitTime(
         building_id=wait_time.building_id,
@@ -20,14 +21,14 @@ def add_wait_time(wait_time: schemas.WaitTimeCreate, db: Session = Depends(datab
     db.add(db_wait_time)
     db.commit()
     db.refresh(db_wait_time)
-    return wait_time
+    return db_wait_time
 
-@app.get("/calc_avg")
+@app.get("/calc_avg", response_model=List[schemas.AvgTimeResponse])
 def calc_avg(db: Session = Depends(database.get_db)):
     results = db.query(
         models.WaitTime.building_id,
         models.WaitTime.store_id,
-        func.avg(models.WaitTime.ewt_num).label('avg_ewt_num'),
+        # func.avg(models.WaitTime.ewt_num).label('avg_ewt_num'),
         func.avg(models.WaitTime.ewt_cur).label('avg_ewt_cur')
     ).group_by(
         models.WaitTime.building_id,
