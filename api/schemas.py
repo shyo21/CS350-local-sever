@@ -9,7 +9,7 @@ class WaitTimeCreate(BaseModel):
     timestamp: datetime = Field(..., example="2024-04-27T15:00:00.000Z")
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class WaitTimeResponse(BaseModel):
     id: int
@@ -20,7 +20,7 @@ class WaitTimeResponse(BaseModel):
     timestamp: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         
 class AvgTimeResponse(BaseModel):
     building_id: int
@@ -28,4 +28,4 @@ class AvgTimeResponse(BaseModel):
     ewt_avg: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
