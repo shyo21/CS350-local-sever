@@ -8,7 +8,7 @@ PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 TOPIC_ID = os.getenv("GCP_PUBLISH_ID")
 API_URL = os.getenv("API_URL")
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-INTERVAL = 15 * 60  # 15 minutes in seconds
+INTERVAL = 10 #15 * 60  # 15 minutes in seconds
 
 # Initialize Pub/Sub publisher
 publisher = pubsub_v1.PublisherClient()
@@ -17,6 +17,7 @@ topic_path = publisher.topic_path(PROJECT_ID, TOPIC_ID)
 def fetch_data():
     response = requests.get(API_URL)
     response.raise_for_status()
+    print(f"fetched data: {response.json()}")
     return response.json()
 
 def publish_message(data):
@@ -27,6 +28,7 @@ def publish_message(data):
 def main():
     while True:
         try:
+            print(f"enter try block")
             data = fetch_data()
             publish_message(data)
             print(f"Published data: {data}")
