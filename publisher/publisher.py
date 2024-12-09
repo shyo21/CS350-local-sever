@@ -20,17 +20,18 @@ def fetch_data():
     return response.json()
 
 def publish_message(data):
-    message = str(data).encode('utf-8')
-    print(f"Publishing message: {message}")
-    future = publisher.publish(topic_path, message)
-    print(f"Published message ID: {future.result()}")  # Ensure the message is published
-    future.result()  # Ensure the message is published
+    for item in data:
+        message = str(item).encode('utf-8')
+        try:
+            future = publisher.publish(topic_path, message)
+            print(f"Published message ID: {future.result()}")  # Ensure the message is published
+        except Exception as e:
+            print(f"An error occurred while publishing message: {e}")
 
 def main():
     while True:
         try:
             data = fetch_data()
-            print(f"Fetched data: {data}")
             publish_message(data)
             print(f"Published data: {data}")
         except Exception as e:
