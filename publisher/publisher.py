@@ -17,19 +17,20 @@ topic_path = publisher.topic_path(PROJECT_ID, TOPIC_ID)
 def fetch_data():
     response = requests.get(API_URL)
     response.raise_for_status()
-    print(f"fetched data: {response.json()}")
     return response.json()
 
 def publish_message(data):
     message = str(data).encode('utf-8')
+    print(f"Publishing message: {message}")
     future = publisher.publish(topic_path, message)
+    print(f"Published message ID: {future.result()}")  # Ensure the message is published
     future.result()  # Ensure the message is published
 
 def main():
     while True:
         try:
-            print(f"enter try block")
             data = fetch_data()
+            print(f"Fetched data: {data}")
             publish_message(data)
             print(f"Published data: {data}")
         except Exception as e:
