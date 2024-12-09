@@ -29,7 +29,7 @@ def calc_avg(db: Session = Depends(database.get_db)):
         models.WaitTime.building_id,
         models.WaitTime.store_id,
         # func.avg(models.WaitTime.ewt_num).label('avg_ewt_num'),
-        func.avg(models.WaitTime.ewt_cur).label('avg_ewt_cur')
+        func.avg(models.WaitTime.ewt_cur).label('ewt_avg')
     ).group_by(
         models.WaitTime.building_id,
         models.WaitTime.store_id
