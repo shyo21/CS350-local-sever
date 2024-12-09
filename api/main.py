@@ -29,7 +29,7 @@ def calc_avg(db: Session = Depends(database.get_db)):
         models.WaitTime.building_id,
         models.WaitTime.store_id,
         # func.avg(models.WaitTime.ewt_num).label('avg_ewt_num'),
-        func.avg(models.WaitTime.ewt_cur).label('ewt_avg')
+        func.avg(models.WaitTime.ewt_cur).label('avg_ewt_cur')
     ).group_by(
         models.WaitTime.building_id,
         models.WaitTime.store_id
@@ -38,4 +38,11 @@ def calc_avg(db: Session = Depends(database.get_db)):
     if not results:
         raise HTTPException(status_code=404, detail="No wait times found")
     
-    return results
+    return [
+        schemas.AvgTimeResponse(
+            building_id=building_id,
+            store_id=store_id,
+            ewt_avg=avg_ewt_cur
+        )
+        for building_id, store_id, avg_ewt_cur in results
+    ]
