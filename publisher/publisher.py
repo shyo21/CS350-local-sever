@@ -13,7 +13,7 @@ INTERVAL = 10 #15 * 60  # 15 minutes in seconds
 # Initialize Pub/Sub publisher
 publisher = pubsub_v1.PublisherClient()
 topic_path = publisher.topic_path(PROJECT_ID, TOPIC_ID)
-print(f"Publisher initialized for topic: {topic_path}")
+print(f"Publisher initialized for topic: {TOPIC_ID}")
 
 def fetch_data():
     response = requests.get(API_URL)
