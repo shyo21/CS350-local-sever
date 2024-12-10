@@ -8,7 +8,8 @@ PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 TOPIC_ID = os.getenv("GCP_TOPIC_ID")
 API_URL = os.getenv("API_URL")
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-INTERVAL = 10 #15 * 60  # 15 minutes in seconds
+INITIAL_DELAY = 10  # 10 seconds
+INTERVAL = 15 * 60  # 15 minutes in seconds
 
 # Initialize Pub/Sub publisher
 publisher = pubsub_v1.PublisherClient()
@@ -30,6 +31,7 @@ def publish_message(data):
             print(f"An error occurred while publishing message: {e}")
 
 def main():
+    time.sleep(INITIAL_DELAY)
     while True:
         try:
             data = fetch_data()
