@@ -5,7 +5,7 @@ from google.cloud import pubsub_v1
 
 # Configuration
 PROJECT_ID = os.getenv("GCP_PROJECT_ID")
-TOPIC_ID = os.getenv("GCP_PUBLISH_ID")
+TOPIC_ID = os.getenv("GCP_TOPIC_ID")
 API_URL = os.getenv("API_URL")
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 INTERVAL = 10 #15 * 60  # 15 minutes in seconds
@@ -13,7 +13,7 @@ INTERVAL = 10 #15 * 60  # 15 minutes in seconds
 # Initialize Pub/Sub publisher
 publisher = pubsub_v1.PublisherClient()
 topic_path = publisher.topic_path(PROJECT_ID, TOPIC_ID)
-print(f"Publisher initialized for topic: {TOPIC_ID}")
+print(f"Publisher initialized for topic: {topic_path}")
 
 def fetch_data():
     response = requests.get(API_URL)
