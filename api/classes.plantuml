@@ -1,0 +1,31 @@
+@startuml classes
+set namespaceSeparator none
+class "WaitTime" as api.models.WaitTime {
+  building_id
+  ewt_cur
+  ewt_num
+  id
+  store_id
+  timestamp
+}
+class "WaitTimeCreate" as api.schemas.WaitTimeCreate {
+  building_id : int
+  ewt_cur : float
+  ewt_num : int
+  store_id : int
+  timestamp : datetime
+}
+class "WaitTimeResponse" as api.schemas.WaitTimeResponse {
+  building_id : int
+  ewt_cur : float
+  ewt_num : int
+  id : int
+  store_id : int
+  timestamp : datetime
+}
+class "AvgTimeResponse" as api.schemas.AvgTimeResponse {
+  building_id : int
+  ewt_avg : float
+  store_id : int
+}
+@enduml

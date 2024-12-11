@@ -1,0 +1,48 @@
+@startuml packages
+set namespaceSeparator none
+
+package "api.main" as api.main {
+    class "main" as api.main.main {
+        add_wait_time()
+    }
+}
+package "api.database" as api.database {
+}
+package "api.models" as api.models {
+    class "WaitTime" as api.models.WaitTime {
+        building_id
+        ewt_cur
+        ewt_num
+        id
+        store_id
+        timestamp
+    }
+}
+package "api.schemas" as api.schemas {
+    class "WaitTimeCreate" as api.schemas.WaitTimeCreate {
+        building_id : int
+        ewt_cur : float
+        ewt_num : int
+        store_id : int
+        timestamp : datetime
+    }
+        class "WaitTimeResponse" as api.schemas.WaitTimeResponse {
+        building_id : int
+        ewt_cur : float
+        ewt_num : int
+        id : int
+        store_id : int
+        timestamp : datetime
+    }
+        class "AvgTimeResponse" as api.schemas.AvgTimeResponse {
+        building_id : int
+        ewt_avg : float
+        store_id : int
+    }
+}
+
+api.main --> api.database
+api.main --> api.models
+api.main --> api.schemas
+api.models --> api.database
+@enduml
